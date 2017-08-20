@@ -1,2 +1,2 @@
 # Algorithms
-Algorithms and Structures
+Algorithms and data structures without using libraries implementation.
