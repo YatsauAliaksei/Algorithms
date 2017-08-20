@@ -22,7 +22,8 @@ public class SortTestUtils {
             if (iterator.hasNext()) {
                 T next = iterator.next();
 
-                if (isGreater.test(current, next)) return false;
+                if (isGreater.test(current, next))
+                    return false;
             }
         }
         return true;
