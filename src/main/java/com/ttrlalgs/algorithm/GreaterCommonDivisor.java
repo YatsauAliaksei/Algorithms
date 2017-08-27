@@ -6,6 +6,7 @@ public class GreaterCommonDivisor {
 
     /**
      * Finds GDC of 2 longs.
+     * Euclid algorithm.
      * @return - GDC or -1 if none
      */
     public static long getGreaterCommonDivisor(long l, long k) {

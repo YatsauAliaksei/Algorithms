@@ -1,9 +1,10 @@
 package com.ttrlalgs.algorithm.sort;
 
-import java.util.Collection;
-import java.util.Comparator;
-import java.util.Iterator;
+import java.util.*;
+import java.util.concurrent.ThreadLocalRandom;
 import java.util.function.BiPredicate;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class SortTestUtils {
 
@@ -27,5 +28,16 @@ public class SortTestUtils {
             }
         }
         return true;
+    }
+
+    public static List<Integer> getShuffledCollection(int low, int upper, int size) {
+        ThreadLocalRandom random = ThreadLocalRandom.current();
+        List<Integer> collection = IntStream.generate(() -> random.nextInt(low, upper))
+                .limit(size)
+                .boxed()
+                .collect(Collectors.toList());
+
+        Collections.shuffle(collection);
+        return collection;
     }
 }

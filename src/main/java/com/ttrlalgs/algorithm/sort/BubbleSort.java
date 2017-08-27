@@ -19,14 +19,15 @@ public class BubbleSort implements Sort {
     }
 
     @Override
-    public <T extends Comparable> Collection<T> sort(Collection<T> collection) {
+    public <T extends Comparable<T>> Collection<T> sort(Collection<T> collection) {
         Preconditions.checkArgument(Objects.nonNull(collection), "Collection cannot be empty.");
 
         return sort(collection, (T t, T t2) -> t.compareTo(t2) > 0);
     }
 
     private <T> Collection<T> sort(Collection<T> collection, BiPredicate<T, T> isGreater) {
-        if (collection.size() == 0) return collection;
+        if (check(collection))
+            return collection;
 
         @SuppressWarnings("unchecked")
         T[] array = (T[]) collection.toArray();
