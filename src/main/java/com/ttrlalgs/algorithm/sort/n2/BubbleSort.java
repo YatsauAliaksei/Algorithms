@@ -1,4 +1,4 @@
-package com.ttrlalgs.algorithm.sort;
+package com.ttrlalgs.algorithm.sort.n2;
 
 import java.util.Arrays;
 import java.util.Collection;
@@ -7,6 +7,7 @@ import java.util.Objects;
 import java.util.function.BiPredicate;
 import com.google.common.base.Preconditions;
 import com.ttrlalgs.algorithm.SortUtils;
+import com.ttrlalgs.algorithm.sort.Sort;
 
 public class BubbleSort implements Sort {
 

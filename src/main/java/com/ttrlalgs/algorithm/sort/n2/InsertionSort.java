@@ -1,10 +1,11 @@
-package com.ttrlalgs.algorithm.sort;
+package com.ttrlalgs.algorithm.sort.n2;
 
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Comparator;
 import java.util.function.BiPredicate;
 import com.ttrlalgs.algorithm.SortUtils;
+import com.ttrlalgs.algorithm.sort.Sort;
 
 public class InsertionSort implements Sort {
 
@@ -25,19 +26,19 @@ public class InsertionSort implements Sort {
 
         Object[] arr = new Object[collection.size()];
 
-        for (T obj : collection) {
+        for (T element : collection) {
             for (int k = 0; k < arr.length; k++) {
                 Object v = arr[k];
                 if (v == null) {
-                    arr[k] = obj;
+                    arr[k] = element;
                     break;
                 }
 
-                if (isGreater.test(obj, (T) v))
+                if (isGreater.test(element, (T) v))
                     continue;
 
                 SortUtils.shiftRight(arr, k);
-                arr[k] = obj;
+                arr[k] = element;
                 break;
             }
         }

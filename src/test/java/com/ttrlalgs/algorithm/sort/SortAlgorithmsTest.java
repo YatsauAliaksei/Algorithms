@@ -8,6 +8,11 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 
+import com.ttrlalgs.algorithm.sort.n2.BubbleSort;
+import com.ttrlalgs.algorithm.sort.n2.InsertionSort;
+import com.ttrlalgs.algorithm.sort.n2.SelectionSort;
+import com.ttrlalgs.algorithm.sort.nlogn.HeapSort;
+
 import static org.assertj.core.api.Assertions.assertThat;
 
 @RunWith(Parameterized.class)
@@ -18,6 +23,7 @@ public class SortAlgorithmsTest {
         return Arrays.asList(new Object[][]{
                 {new InsertionSort(), "Insert Sort"},
                 {new BubbleSort(), "Bubble Sort"},
+                {new HeapSort(), "Heap Sort"},
                 {new SelectionSort(), "Selection Sort"}
         });
     }
@@ -46,7 +52,7 @@ public class SortAlgorithmsTest {
     public void sort_ComparatorBroken_Failed() throws Exception {
         ThreadLocalRandom random = ThreadLocalRandom.current();
         Collection<Integer> sorted = sortAlg.sort(SortTestUtils.getShuffledCollection(-5, 10, 10),
-                (o1, o2) -> random.nextInt(-1, 1));
+                (o1, o2) -> random.nextInt(-1, 2));
 
         assertThat(SortTestUtils.isSorted(sorted)).isFalse();
     }

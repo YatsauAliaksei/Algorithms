@@ -1,10 +1,11 @@
-package com.ttrlalgs.algorithm.sort;
+package com.ttrlalgs.algorithm.sort.n2;
 
 import java.util.Collection;
 import java.util.Comparator;
 import java.util.function.BiFunction;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
+import com.ttrlalgs.algorithm.sort.Sort;
 
 public class SelectionSort implements Sort {
 
