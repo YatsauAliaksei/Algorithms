@@ -38,6 +38,10 @@ public class SortTestUtils {
                 .collect(Collectors.toList());
 
         Collections.shuffle(collection);
+        if (SortTestUtils.isSorted(collection)) { // recurse while collection is sorted.
+            System.out.println("Sorted collection: " + collection);
+            return getShuffledCollection(low, upper, size);
+        }
         return collection;
     }
 }

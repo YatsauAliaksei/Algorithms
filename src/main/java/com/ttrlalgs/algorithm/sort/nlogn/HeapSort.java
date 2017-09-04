@@ -3,33 +3,29 @@ package com.ttrlalgs.algorithm.sort.nlogn;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Comparator;
-import java.util.Objects;
 import java.util.function.BiPredicate;
 import com.google.common.base.Preconditions;
 import com.ttrlalgs.algorithm.SortUtils;
-import com.ttrlalgs.algorithm.sort.Sort;
+import com.ttrlalgs.algorithm.sort.AbsSort;
 
-public class HeapSort implements Sort {
+public class HeapSort extends AbsSort {
 
     @Override
     public <T> Collection<T> sort(Collection<T> collection, Comparator<T> comparator) {
-        Preconditions.checkArgument(Objects.nonNull(collection), "Collection cannot be empty.");
-        Preconditions.checkArgument(Objects.nonNull(comparator), "Comparator cannot be null.");
         Preconditions.checkArgument(!collection.contains(null), "Collection cannot contain Nulls");
 
-        return sort(collection, (T t, T t2) -> comparator.compare(t, t2) > 0);
+        return super.sort(collection, comparator);
     }
 
     @Override
     public <T extends Comparable<T>> Collection<T> sort(Collection<T> collection) {
-        Preconditions.checkArgument(Objects.nonNull(collection), "Collection cannot be empty.");
         Preconditions.checkArgument(!collection.contains(null), "Collection cannot contain Nulls");
 
-        return sort(collection, (T t, T t2) -> t.compareTo(t2) > 0);
+        return super.sort(collection);
     }
 
     @SuppressWarnings("unchecked")
-    private <T> Collection<T> sort(Collection<T> collection, BiPredicate<T, T> isGreater) {
+    protected <T> Collection<T> sort(Collection<T> collection, BiPredicate<T, T> isGreater) {
         Object[] heap = new Object[collection.size()];
 
         int lastElementIndex = 0;

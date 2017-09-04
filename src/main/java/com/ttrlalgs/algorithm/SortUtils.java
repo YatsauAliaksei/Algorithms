@@ -14,10 +14,14 @@ public class SortUtils {
     }
 
     /**
-     * Shifts array to the right from element {@param index}.
-     * @param index - included.
+     * Shifts array to the right from element {@param from}.
+     * @param from - included.
      */
-    public static void shiftRight(Object[] array, int index) {
-        System.arraycopy(array, index, array, index + 1, array.length - index - 1);
+    public static void shiftRight(Object[] array, int from) {
+        System.arraycopy(array, from, array, from + 1, array.length - from - 1);
+    }
+
+    public static void shiftRight(Object[] array, int from, int to) {
+        System.arraycopy(array, from, array, from + 1, to - from);
     }
 }
