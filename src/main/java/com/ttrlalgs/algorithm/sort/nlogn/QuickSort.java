@@ -33,7 +33,7 @@ public class QuickSort extends AbsSort {
     }
 
     private <T> void sort(T[] arr, int start, int end, BiPredicate<T, T> isGreater) {
-        if (start >= end) return;
+        if (start == end) return;
 
         ThreadLocalRandom random = ThreadLocalRandom.current();
         int splitElementIndex = random.nextInt(start, end);
@@ -46,7 +46,7 @@ public class QuickSort extends AbsSort {
                 splitElementIndex = i;
             } else if (!greater && i > splitElementIndex) {
                 T tmp = arr[i];
-                SortUtils.shiftRight(arr, start, i);
+                SortUtils.shiftRight(arr, start, i); // less effective than lo/hi gap approach.
                 arr[start] = tmp;
                 splitElementIndex++;
             }
