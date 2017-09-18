@@ -26,22 +26,15 @@ public class CountSort implements Sort {
         if (check(collection))
             return collection;
 
-        // checks that all elements are Integers.
-        // restricted by max array length in Java.
-        collection.stream()
-                .filter(e -> !(e instanceof Integer))
-                .findFirst()
-                .ifPresent(e -> {
-                    throw new UnsupportedOperationException("Count Sort supports only Integers");
-                });
+        int max = getMaxElement(collection);
 
-        int[] storage = new int[collection.size()];
+        int[] storage = new int[max];
 
         collection.stream()
                 .map(e -> (Integer) e)
                 .forEach(e -> storage[e] += 1);
 
-        int[] sorted = new int[storage.length];
+        int[] sorted = new int[collection.size()];
 
         int cursor = 0;
         for (int i = 0; i < storage.length; i++) {
@@ -54,6 +47,27 @@ public class CountSort implements Sort {
 
         return (Collection<T>) Arrays.stream(sorted)
                 .boxed().collect(toList());
+    }
+
+    private <T> int getMaxElement(Collection<T> collection) {
+        // checks that all elements are Integers.
+        // restricted by max array length in Java.
+        int max = -1;
+        for (T e : collection) {
+            if (!(e instanceof Integer)) {
+                throw new UnsupportedOperationException("Count Sort supports only Integers");
+            }
+
+            int i = (Integer) e;
+
+            if(i < 0)
+                throw new UnsupportedOperationException("Supports only positive values.");
+
+            if (i > max) {
+                max = i;
+            }
+        }
+        return max;
     }
 
     public <T extends Comparable<T>> Collection<T> sort(Collection<T> collection) {

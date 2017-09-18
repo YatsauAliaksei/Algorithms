@@ -17,10 +17,7 @@ import org.junit.runners.parameterized.TestWithParameters;
 import com.ttrlalgs.algorithm.sort.n2.BubbleSort;
 import com.ttrlalgs.algorithm.sort.n2.InsertionSort;
 import com.ttrlalgs.algorithm.sort.n2.SelectionSort;
-import com.ttrlalgs.algorithm.sort.nlogn.CountSort;
-import com.ttrlalgs.algorithm.sort.nlogn.HeapSort;
-import com.ttrlalgs.algorithm.sort.nlogn.MergeSort;
-import com.ttrlalgs.algorithm.sort.nlogn.QuickSort;
+import com.ttrlalgs.algorithm.sort.nlogn.*;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -31,20 +28,21 @@ public class SortAlgorithmsTest {
     @Parameterized.Parameters(name = "{1}")
     public static Iterable<Object> data() {
         return Arrays.asList(new Object[][]{
-                {new InsertionSort(), "Insert Sort", -1000, 1000},
-                {new BubbleSort(), "Bubble Sort", -1000, 1000},
+//                {new InsertionSort(), "Insert Sort", -1000, 1000},
+//                {new BubbleSort(), "Bubble Sort", -1000, 1000},
                 {new HeapSort(), "Heap Sort", -1000, 1000},
                 {new QuickSort(), "Quick Sort", -1000, 1000},
-                {new SelectionSort(), "Selection Sort", -1000, 1000},
+//                {new SelectionSort(), "Selection Sort", -1000, 1000},
                 {new MergeSort(), "Merge Sort", -1000, 1000},
-                {new CountSort(), "Count Sort", 0, 100},
+//                {new CountSort(), "Count Sort", 0, 100},
+                {new MyTimSort(), "MyTim Sort", 0, 1000},
         });
     }
 
     private Sort sortAlg;
     private int from;
     private int to;
-    private int size = 10_000;
+    private int size = 1_00000;
 
     public SortAlgorithmsTest(Sort sortAlg, String algName, int from, int to) {
         this.sortAlg = sortAlg;
@@ -127,4 +125,22 @@ public class SortAlgorithmsTest {
 
         int param() default -1;
     }
+
+
+
+
+/*
+
+       3 8 2 0 4 1
+
+       3 8
+       2 4
+       0 1
+
+       0 1 2 3 4 8
+
+
+
+
+*/
 }
