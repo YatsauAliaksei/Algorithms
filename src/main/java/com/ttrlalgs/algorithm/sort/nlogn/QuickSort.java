@@ -33,26 +33,39 @@ public class QuickSort extends AbsSort {
     }
 
     private <T> void sort(T[] arr, int start, int end, BiPredicate<T, T> isGreater) {
-        if (start == end) return;
+        if (end - start <= 1) return;
 
         ThreadLocalRandom random = ThreadLocalRandom.current();
         int splitElementIndex = random.nextInt(start, end);
 
-        for (int i = start; i < end; i++) {
-            boolean greater = isGreater.test(arr[i], arr[splitElementIndex]);
+        SortUtils.swap(arr, start, splitElementIndex);
+        T splitElement = arr[start];
+        arr[start] = null;
 
-            if (greater && i < splitElementIndex) {
-                SortUtils.swap(arr, i, splitElementIndex);
-                splitElementIndex = i;
-            } else if (!greater && i > splitElementIndex) {
-                T tmp = arr[i];
-                SortUtils.shiftRight(arr, start, i); // less effective than lo/hi gap approach.
-                arr[start] = tmp;
-                splitElementIndex++;
+        int left = start;
+        int right = end - 1;
+        int testElementIndex = right;
+        while (right > left) {
+
+            if (isGreater.test(arr[testElementIndex], splitElement)) {
+                if (testElementIndex == right) {
+                    testElementIndex = --right;
+                } else {
+                    SortUtils.swap(arr, testElementIndex, right--);
+                    testElementIndex = right;
+                }
+            } else {
+                if (testElementIndex == left) {
+                    testElementIndex = ++left;
+                } else {
+                    SortUtils.swap(arr, testElementIndex, left++);
+                    testElementIndex = left;
+                }
             }
         }
+        arr[left] = splitElement;
 
-        sort(arr, start, splitElementIndex, isGreater);
-        sort(arr, splitElementIndex + 1, end, isGreater);
+        sort(arr, start, left, isGreater);
+        sort(arr, left + 1, end, isGreater);
     }
 }

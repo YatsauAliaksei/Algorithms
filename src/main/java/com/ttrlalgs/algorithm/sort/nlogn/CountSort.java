@@ -1,10 +1,10 @@
 package com.ttrlalgs.algorithm.sort.nlogn;
 
+import javax.annotation.Nullable;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Comparator;
 import java.util.Objects;
-import javax.annotation.Nullable;
 import com.google.common.base.Preconditions;
 import com.ttrlalgs.algorithm.sort.Sort;
 
@@ -28,7 +28,7 @@ public class CountSort implements Sort {
 
         int max = getMaxElement(collection);
 
-        int[] storage = new int[max];
+        int[] storage = new int[max + 1];
 
         collection.stream()
                 .map(e -> (Integer) e)

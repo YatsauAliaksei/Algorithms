@@ -4,7 +4,13 @@ import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
+import java.util.function.Function;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runner.Runner;
@@ -14,10 +20,12 @@ import org.junit.runners.model.InitializationError;
 import org.junit.runners.parameterized.BlockJUnit4ClassRunnerWithParameters;
 import org.junit.runners.parameterized.ParametersRunnerFactory;
 import org.junit.runners.parameterized.TestWithParameters;
-import com.ttrlalgs.algorithm.sort.n2.BubbleSort;
-import com.ttrlalgs.algorithm.sort.n2.InsertionSort;
-import com.ttrlalgs.algorithm.sort.n2.SelectionSort;
-import com.ttrlalgs.algorithm.sort.nlogn.*;
+import com.ttrlalgs.algorithm.SortTestUtils;
+import com.ttrlalgs.algorithm.sort.nlogn.CountSort;
+import com.ttrlalgs.algorithm.sort.nlogn.HeapSort;
+import com.ttrlalgs.algorithm.sort.nlogn.MergeSort;
+import com.ttrlalgs.algorithm.sort.nlogn.MyTimSort;
+import com.ttrlalgs.algorithm.sort.nlogn.QuickSort;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -30,19 +38,19 @@ public class SortAlgorithmsTest {
         return Arrays.asList(new Object[][]{
 //                {new InsertionSort(), "Insert Sort", -1000, 1000},
 //                {new BubbleSort(), "Bubble Sort", -1000, 1000},
-                {new HeapSort(), "Heap Sort", -1000, 1000},
-                {new QuickSort(), "Quick Sort", -1000, 1000},
 //                {new SelectionSort(), "Selection Sort", -1000, 1000},
+                {new HeapSort(), "Heap Sort", -1000, 1000},
+                {new MyTimSort(), "MyTim Sort", -100, 100},
+                {new QuickSort(), "Quick Sort", -1000, 1000},
                 {new MergeSort(), "Merge Sort", -1000, 1000},
-//                {new CountSort(), "Count Sort", 0, 100},
-                {new MyTimSort(), "MyTim Sort", 0, 1000},
+                {new CountSort(), "Count Sort", 0, 200},
         });
     }
 
     private Sort sortAlg;
     private int from;
     private int to;
-    private int size = 1_00000;
+    private int size = 1_00_0000;
 
     public SortAlgorithmsTest(Sort sortAlg, String algName, int from, int to) {
         this.sortAlg = sortAlg;
@@ -52,26 +60,20 @@ public class SortAlgorithmsTest {
 
     @Test
     public void sort_Comparable_Success() throws Exception {
-        List<Integer> shuffledCollection = SortTestUtils.getShuffledCollection(from, to, size);
-        List<Integer> copy = new ArrayList<>(shuffledCollection); // in case algorithm transforms original collection. F.i. Selection sort.
-        Collections.copy(copy, shuffledCollection);
-
-        Collection<Integer> sorted = sortAlg.sort(shuffledCollection);
-
-        assertThat(SortTestUtils.isSorted(sorted)).isTrue();
-        assertThat(sorted).containsOnlyElementsOf(copy);
+        wrapSort(in -> sortAlg.sort(in));
     }
 
     @Test
     public void sort_Comparator_Success() throws Exception {
-        List<Integer> shuffledCollection = SortTestUtils.getShuffledCollection(from, to, size);
-        List<Integer> copy = new ArrayList<>(shuffledCollection);
-        Collections.copy(copy, shuffledCollection);
+        wrapSort(in -> sortAlg.sort(in, Comparator.naturalOrder()));
+    }
 
-        Collection<Integer> sorted = sortAlg.sort(shuffledCollection, Comparator.naturalOrder());
-
-        assertThat(SortTestUtils.isSorted(sorted, Comparator.naturalOrder())).isTrue();
-        assertThat(sorted).containsOnlyElementsOf(copy);
+    @Test
+    public void java_default_sort_marker() {
+        wrapSort(in -> {
+            in.sort(Comparator.naturalOrder());
+            return in;
+        });
     }
 
     @Test
@@ -87,6 +89,17 @@ public class SortAlgorithmsTest {
         if (isSorted)
             System.out.println("Sorted: " + sorted);
         assertThat(isSorted).isFalse();
+        assertThat(sorted).containsOnlyElementsOf(copy);
+    }
+
+    private void wrapSort(Function<List<Integer>, Collection<Integer>> sortFunction) {
+        List<Integer> shuffledCollection = SortTestUtils.getShuffledCollection(from, to, size);
+        List<Integer> copy = new ArrayList<>(shuffledCollection); // in case algorithm transforms original collection. F.i. Selection sort.
+        Collections.copy(copy, shuffledCollection);
+
+        Collection<Integer> sorted = sortFunction.apply(shuffledCollection);
+
+        assertThat(SortTestUtils.isSorted(sorted)).isTrue();
         assertThat(sorted).containsOnlyElementsOf(copy);
     }
 
@@ -125,22 +138,4 @@ public class SortAlgorithmsTest {
 
         int param() default -1;
     }
-
-
-
-
-/*
-
-       3 8 2 0 4 1
-
-       3 8
-       2 4
-       0 1
-
-       0 1 2 3 4 8
-
-
-
-
-*/
 }
