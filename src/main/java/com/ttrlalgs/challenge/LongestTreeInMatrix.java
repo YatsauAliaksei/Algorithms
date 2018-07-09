@@ -1,6 +1,6 @@
 package com.ttrlalgs.challenge;
 
-public class DFS {
+public class LongestTreeInMatrix {
 
     public static void main(String[] args) {
         int[][] grid = {
@@ -24,7 +24,7 @@ public class DFS {
     }
 
     private static int checkNeightberhoods(int[][] grid, int n, int m, int[][] position) {
-        if(n < 0 || m < 0 || grid.length <= n || grid[0].length <= m) {
+        if (n < 0 || m < 0 || grid.length <= n || grid[0].length <= m) {
             return 0;
         }
 

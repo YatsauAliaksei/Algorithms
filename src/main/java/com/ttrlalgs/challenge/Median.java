@@ -9,6 +9,10 @@ public class Median {
     public static void main(String[] args) {
         int[] a = {3, 7, 1, 9, 15, 2};
         List<Integer> sorted = new ArrayList<>();
+        takeMedian(a, sorted);
+    }
+
+    private static void takeMedian(int[] a, List<Integer> sorted) {
         for (int a_i = 0; a_i < a.length; a_i++) {
             int k = a[a_i];
             int i = Collections.binarySearch(sorted, k);
