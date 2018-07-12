@@ -1,11 +1,11 @@
-package com.ttrlalgs.algorithm;
+package com.ttrlalgs.algorithm.integration;
 
 import java.util.function.UnaryOperator;
 
 public class AdaptiveMidpointIntegration {
 
     /**
-     * Adaptive integration function for any continuous {@param function} function.
+     * Adaptive integration function for any continuous {@param function} function. Limited by X-ordinate
      * @param accuracy - of integration calculation. Note, high accuracy could lead to StackOverflowError.
      * @param function - continuous on {@param startX} & {@param endX} function.
      * @return - calculated with {@param accuracy} area of {@param function} rounded by {@param startX} & {@param endX}.

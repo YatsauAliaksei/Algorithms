@@ -1,5 +1,6 @@
 package com.ttrlalgs.algorithm;
 
+import com.ttrlalgs.algorithm.integration.AdaptiveMidpointIntegration;
 import org.junit.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
