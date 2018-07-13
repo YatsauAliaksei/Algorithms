@@ -31,6 +31,15 @@ public class GraphPathSearchTest {
         System.out.println(vertices);
     }
 
+    @Test
+    public void pathToDFS() {
+        List<Edge<Integer>> edges = getEdges();
+        DFS<Integer> dfs = new DFS<>(edges, Vertex.of(1));
+
+        List<Vertex<Integer>> vertices = dfs.pathTo(Vertex.of(6));
+        assertThat(vertices).containsExactly(Vertex.of(1), Vertex.of(2), Vertex.of(3), Vertex.of(4));
+    }
+
     private List<Edge<Integer>> getEdges() {
         return List.of(
                 Edge.of(Vertex.of(1), Vertex.of(2), 1),

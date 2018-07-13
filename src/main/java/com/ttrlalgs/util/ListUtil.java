@@ -4,7 +4,7 @@ import com.google.common.base.Preconditions;
 
 import java.util.Collection;
 
-public class ListUtil {
+public abstract class ListUtil {
 
     /**
      * For even {@param data} size will return greater element.

@@ -7,7 +7,7 @@ import com.ttrlalgs.structure.Node;
 import java.util.ArrayList;
 import java.util.List;
 
-public class TreeUtil {
+public abstract class TreeUtil {
 
     public static <T extends Comparable<T>> Node<T> createBalanced(List<T> data) {
         Preconditions.checkArgument(data != null && data.size() > 0);
