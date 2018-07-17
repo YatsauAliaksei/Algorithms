@@ -9,6 +9,11 @@ import java.util.List;
 
 public abstract class TreeUtil {
 
+    /**
+     * Creates Balanced Search Tree. So called AVL balance. Length of 2 children can't diff more that on 1 lvl.
+     * For pow of 2 data size creates perfect BST.
+     * @return - root node of the tree.
+     */
     public static <T extends Comparable<T>> Node<T> createBalanced(List<T> data) {
         Preconditions.checkArgument(data != null && data.size() > 0);
 

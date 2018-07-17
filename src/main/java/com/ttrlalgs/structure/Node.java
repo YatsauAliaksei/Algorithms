@@ -1,8 +1,10 @@
 package com.ttrlalgs.structure;
 
 import lombok.EqualsAndHashCode;
+import lombok.ToString;
 
 @EqualsAndHashCode
+@ToString
 public class Node<T extends Comparable<T>> {
     private T value;
     private Node<T> left, right;

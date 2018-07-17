@@ -1,12 +1,13 @@
 package com.ttrlalgs.algorithm.sort.nlogn;
 
+import com.google.common.base.Preconditions;
+import com.ttrlalgs.algorithm.SortUtils;
+import com.ttrlalgs.algorithm.sort.AbsSort;
+
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Comparator;
 import java.util.function.BiPredicate;
-import com.google.common.base.Preconditions;
-import com.ttrlalgs.algorithm.SortUtils;
-import com.ttrlalgs.algorithm.sort.AbsSort;
 
 public class HeapSort extends AbsSort {
 
