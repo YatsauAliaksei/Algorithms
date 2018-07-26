@@ -122,8 +122,13 @@
             <groupId>org.jetbrains</groupId>
             <artifactId>annotations</artifactId>
         </dependency>
+        <dependency>
+            <groupId>commons-collections</groupId>
+            <artifactId>commons-collections</artifactId>
+            <version>3.2.2</version>
+        </dependency>
 
-        <!--classify-->
+        <!--tests-->
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
@@ -131,11 +136,6 @@
         <dependency>
             <groupId>org.assertj</groupId>
             <artifactId>assertj-core</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>commons-collections</groupId>
-            <artifactId>commons-collections</artifactId>
-            <version>3.2.2</version>
         </dependency>
 
     </dependencies>

@@ -12,7 +12,7 @@ import java.util.PriorityQueue;
  * Dijkstras algorithm implementation.
  * Negative weights not supported.
  */
-public class Dijkstras<V> extends GraphPathSearch<V> {
+public final class Dijkstras<V> extends GraphPathSearch<V> {
 
     public Dijkstras(List<Edge<V>> edges, Vertex<V> startVertex) {
         super(edges, startVertex);

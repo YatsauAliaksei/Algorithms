@@ -14,7 +14,7 @@ import static java.util.stream.Collectors.toList;
 /**
  * Generic bread first search algorithm implementation.
  */
-public abstract class GraphPathSearch<V> {
+abstract class GraphPathSearch<V> {
 
     private final Vertex<V> startVertex;
     private final List<Edge<V>> edges;
